@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Deep Thought (Engine 2)</title>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: linear-gradient(to bottom, #007bff, #66ccff); /* CSS gradient for the background */
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    min-height: 100vh; /* Set a minimum height to prevent background repetition */
+}
+
+.quote {
+    text-align: center;
+    font-size: 36px; /* Increase font size */
+    margin: 100px 0; /* Move quote down */
+    padding: 20px 100px; /* Add padding to the top and sides */
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+form {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Remove background color and box shadow */
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.4em;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 15px; /* Increase padding */
+    /* border: none; */
+    border-bottom: 2px solid #ccc;
+    background-color: white;
+    outline: none;
+    color: black;
+    border-radius: 10px;
+    font-size: 24px; /* Increase font size */
+}
+
+input[type="submit"] {
+    background-image: linear-gradient(to right, #ff0000, #ffcc00); /* New contrasting gradient */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); */
+    margin-top: 50px; /* Move down */
+    font-size: 18px; /* Increase font size */
+    display: block; /* Ensure button is displayed as a block element */
+    margin: 0 auto; /* Center the button horizontally */
+}
+</style>
+
+</head>
+<body>
+<div class="quote">
+    #quote# - #speaker#
+</div>
+<form>
+<input type="text" placeholder="Send me a deep thought">
+<div><br/></div>
+<input type="submit" value="Submit">
+<div style="text-align: center; margin-top: 50px;">
+    <a href="./jobs">Click here for the Steve Jobs version</a>
+    </div>    
+</form>
+
+<script>
+    const form = document.querySelector('form');
+    
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();   
+
+        window.alert('Form submitted!');
+     // Prevent the default form submission behavior   
+    
+        const inputText = document.querySelector('input[type="text"]').value;
+
+        fetch(`./submit`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ quote: inputText })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Handle the response from the server
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+    });
+    </script>
+</body>
+</html>

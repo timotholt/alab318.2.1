@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "*.engine1": "html",
+"*.engine2": "html",
+"*.engine3": "html"
+  }
+}
