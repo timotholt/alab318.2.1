@@ -193,7 +193,7 @@ app3.use(express3.urlencoded({ extended: true }));
 app3.set("views", "./views/");
 app3.set("view engine", "engine3");
 app3.use('/styles', express3.static('styles')); // serve static files from the 'styles' directory
-app3.use('/.', express3.static('./')); // serve static files from the 'styles' directory
+app3.use('/public', express3.static('public')); // serve static files from the 'styles' directory
 
 
 // We support two views:
@@ -202,6 +202,17 @@ app3.use('/.', express3.static('./')); // serve static files from the 'styles' d
 // 127.0.0.1:3001/mandela
 //
 
+app3.get("/", (req, res) => {
+    const options = {
+        speaker: "Nelson Mandela",
+        quote:
+            `"The greatest glory in living lies not in never falling, but in rising every time we fall."`,
+        id: "mandela"
+    };
+    console.log(`SERVER 1 (port ${PORT1}) - GET /:`);
+    res.render("mandela", options);
+})
+
 app3.get("/mandela", (req, res) => {
     const options = {
         speaker: "Nelson Mandela",
@@ -209,6 +220,7 @@ app3.get("/mandela", (req, res) => {
             `"The greatest glory in living lies not in never falling, but in rising every time we fall."`,
         id: "mandela"
     };
+    console.log(`SERVER 3 (port ${PORT3}) - GET /mandela:`);
     res.render("mandela", options);
 });
 
@@ -229,7 +241,6 @@ app3.post("/submit", (req, res) => {
     // Get the quote property from the middleware
     const quote = req.body.quote;
     console.log(quote);
-    res.status(200).send({ message: "Request processed" });
 });
 
 app3.get("/download", (req, res) => {
