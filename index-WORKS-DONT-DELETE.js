@@ -57,7 +57,6 @@ app.get("/", (req, res) => {
 
 
 
-
 /////////////////////////////
 
 
@@ -163,8 +162,9 @@ app.route('/learner')
     res.send("Update the learner's info")
   })
 
-
-
+app.get('go-somewhere', (req, res) => {
+    res.redirect('https://medium.com')
+})
 
 
 

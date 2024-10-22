@@ -12,6 +12,7 @@ body {
     background-position: center;
     color: #fff;
     min-height: 100vh; /* Set a minimum height to prevent background repetition */
+    text-align: center;
 }
 
 .picture {
@@ -52,6 +53,7 @@ input[type="text"] {
     color: black;
     border-radius: 10px;
     font-size: 24px; /* Increase font size */
+    width: 300px;
 }
 
 input[type="submit"] {

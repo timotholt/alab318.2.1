@@ -12,12 +12,19 @@ body {
     background-position: center;
     color: #fff;
     min-height: 100vh; /* Set a minimum height to prevent background repetition */
+    text-align: center;
 }
 
+.picture {
+    display: none;
+    padding: 100px 0px 0px 0px;
+    align-items: center;
+    text-align: center;
+}
 .quote {
     text-align: center;
     font-size: 36px; /* Increase font size */
-    margin: 100px 0; /* Move quote down */
+    margin: 0px 0; /* Move quote down */
     padding: 20px 100px; /* Add padding to the top and sides */
 }
 
@@ -27,10 +34,10 @@ a {
 }
 
 form {
-    position: absolute;
+    /* position: absolute; */
     top: 70%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    /* transform: translate(-50%, -50%); */
     /* Remove background color and box shadow */
     padding: 20px;
     border-radius: 10px;
@@ -47,6 +54,7 @@ input[type="text"] {
     color: black;
     border-radius: 10px;
     font-size: 24px; /* Increase font size */
+    width: 300px;
 }
 
 input[type="submit"] {
@@ -62,49 +70,89 @@ input[type="submit"] {
     display: block; /* Ensure button is displayed as a block element */
     margin: 0 auto; /* Center the button horizontally */
 }
+
+#download-button {
+    font-size: 24px;
+}
+
 </style>
 
 </head>
 <body>
+<div class="picture">
+    <img src="/public/nelsonmandela.webp" alt="Nelson Mandela" width="200">
+    <form action="/download" method="get">
+        <input type="hidden" name="id" value="#id#">
+        <input type="submit" id="download-button" value="Download">
+    </form>    
+</div>
 <div class="quote">
     #quote# - #speaker#
 </div>
-<form>
-<input type="text" placeholder="Send me a deep thought">
+<form action="/submit" method="post">
+<input type="text" name="quote" placeholder="Send me a deep thought">
 <div><br/></div>
 <input type="submit" value="Submit">
 <div style="text-align: center; margin-top: 50px;">
     <a href="./jobs">Click here for the Steve Jobs version</a>
-    </div>    
+    </div>
 </form>
 
 <script>
-    const form = document.querySelector('form');
+    // const form = document.querySelector('form');
     
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();   
+    // form.addEventListener('submit', (event) => {
+    //     event.preventDefault();   
 
-        window.alert('Form submitted!');
-     // Prevent the default form submission behavior   
+    //     window.alert('Form submitted!');
+    //  // Prevent the default form submission behavior   
     
-        const inputText = document.querySelector('input[type="text"]').value;
+    //     const inputText = document.querySelector('input[type="text"]').value;
 
-        fetch(`./submit`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ quote: inputText })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data); // Handle the response from the server
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+    //     fetch(`./submit`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({ quote: inputText })
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log(data); // Handle the response from the server
+    //     })
+    //     .catch(error => {
+    //         console.error('Error:', error);
+    //     });
+    // });
 
-    });
+    // const downloadButton = document.querySelector('#download-button');
+    // downloadButton.addEventListener('click', () => {
+    //     // Prevent the default form submission behavior   
+    //     event.preventDefault();
+
+    //     window.alert('Download image submitted!');
+
+    //     fetch('./download?id=#id#')
+    //     .then(response => response.blob())
+    //     .then(blob => {
+    //         var file=window.URL.createObjectURL(blob);
+    //         window.location.assign(file);
+    //     });
+
+        // const options = {
+        //     headers: {
+        //         "Authorization": "Bearer " + "12345678900"}
+        // }
+
+        // Access the server with the download endpoint and pass it the image id as a parameter
+        // fetch('./download?id=#id#', options)
+        // .then(response => response.blob())
+        // .then(blob => {
+        //     var file=window.URL.createObjectURL(blob);
+        //     window.location.assign(file);
+        // })
+    // });
     </script>
 </body>
 </html>
+
